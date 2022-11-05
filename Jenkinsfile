@@ -14,7 +14,7 @@ node {
 	}
 	stage('SonarQube Stage') {		
 		echo 'sonarqube stage started'
-		withSonarQubeEnv(installationName: 'sonarqube-server') {
+		withSonarQubeEnv('sonarqube-server') {
 			sh 'mvn sonar:sonar'
 		}
 	}
