@@ -3,7 +3,7 @@ pipeline{
     stages{
        stage('GetCode'){
             steps{
-                git 'https://github.com/samarthshukla18/DevOps-Project'
+                git branch: 'main', url: 'https://github.com/samarthshukla18/DevOps-Project'
             }
          }        
        stage('Build'){
