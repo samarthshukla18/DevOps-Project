@@ -15,7 +15,7 @@ node {
 	stage('SonarQube Stage') {		
 		echo 'sonarqube stage started'
 		withSonarQubeEnv(installationName: 'sonarqube-server') {
-			sh './mvnw clean org.sonarsource.scanner.maven:sonar-maven-plugin:3.9.0.2155:sonar'
+			sh 'mvn sonar:sonar'
 		}
 	}
 	stage('Deploy Stage') {		
