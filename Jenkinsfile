@@ -4,11 +4,14 @@ pipeline{
        stage('GetCode'){
             steps{
                 git branch: 'main', url: 'https://github.com/samarthshukla18/DevOps-Project'
+                echo "Get Code Completed..."
             }
          }        
        stage('Build'){
             steps{
+                echo "Build started..."
                 sh 'mvn clean package'
+                echo "Build completed..."
             }
          }
         stage('SonarQube analysis') {
