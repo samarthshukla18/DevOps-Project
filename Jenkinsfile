@@ -10,7 +10,6 @@ pipeline{
        stage('Build'){
             steps{
                 echo "Build started..."
-                sh 'mvn clean package'
                 echo "Build completed..."
             }
          }
