@@ -1,7 +1,7 @@
 node {
 	stage('SCM Checkout') {		
 		echo 'checkout stage started'
-		git 'https://github.com/samarthshukla18/DevOps-Project.git'
+		git branch: 'main', url: 'https://github.com/samarthshukla18/DevOps-Project.git'
 		echo 'checkout stage completed'			
 	}
 	stage('Compile Stage') {		
