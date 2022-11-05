@@ -1,24 +1,29 @@
-node {
-	stage('SCM Checkout') {		
-		echo 'checkout stage started'
-		git branch: 'main', url: 'https://github.com/samarthshukla18/DevOps-Project.git'
-		echo 'checkout stage completed'			
-	}
-	stage('Compile Stage') {		
-		echo 'compile stage started'
-		echo 'compile stage completed'			
-	}
-	stage('Test Stage') {		
-		echo 'test stage started'
-		echo 'test stage completed'			
-	}
-	stage('SonarQube Stage') {		
-		withSonarQubeEnv('sonarqube-server'){
-				sh "mvn sonar:sonar"
-			}
-	}
-	stage('Deploy Stage') {		
-		echo 'deploy stage started'
-		echo 'deploy stage completed'			
-	}
+pipeline{
+    agent any
+    environment {
+        PATH = "$PATH:/opt/apache-maven-3.8.2/bin"
+    }
+    stages{
+       stage('GetCode'){
+            steps{
+                git 'https://github.com/ravdy/javaloginapp.git'
+            }
+         }        
+       stage('Build'){
+            steps{
+                sh 'mvn clean package'
+            }
+         }
+        stage('SonarQube analysis') {
+//    def scannerHome = tool 'SonarScanner 4.0';
+        steps{
+        withSonarQubeEnv('sonarqube-8.9') { 
+        // If you have configured more than one global server connection, you can specify its name
+//      sh "${scannerHome}/bin/sonar-scanner"
+        sh "mvn sonar:sonar"
+    }
+        }
+        }
+       
+    }
 }
