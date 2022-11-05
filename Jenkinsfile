@@ -14,10 +14,8 @@ node {
 	}
 	stage('SonarQube Stage') {		
 		steps{
-			script{
-				withSonarQubeEnv('sonarqube-server'){
-					sh "mvn sonar:sonar"
-				}
+			withSonarQubeEnv('sonarqube-server'){
+				sh "mvn sonar:sonar"
 			}
 		}
 	}
