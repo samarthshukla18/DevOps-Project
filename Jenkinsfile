@@ -14,9 +14,9 @@ node {
 	}
 	stage('SonarQube Stage') {		
 		echo 'sonarqube stage started'
-		withSonarQubeEnv('sonarqube-server') {
-			sh 'mvn sonar:sonar'
-		}
+		def sonarscannerHome = tool name: 'sonarqube-scanner'
+		bat "${sonarscannerHome}/bin/sonar-scanner"
+		echo 'sonarqube stage completed'
 	}
 	stage('Deploy Stage') {		
 		echo 'deploy stage started'
