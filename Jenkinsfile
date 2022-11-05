@@ -13,10 +13,13 @@ node {
 		echo 'test stage completed'			
 	}
 	stage('SonarQube Stage') {		
-		echo 'sonarqube stage started'
-		def sonarscannerHome = tool name: 'sonarqube-scanner'
-		bat "${sonarscannerHome}/bin/sonar-scanner"
-		echo 'sonarqube stage completed'
+		steps{
+			script{
+				withSonarQubeEnv('sonarqube-server'){
+					sh "mvn sonar:sonar"
+				}
+			}
+		}
 	}
 	stage('Deploy Stage') {		
 		echo 'deploy stage started'
