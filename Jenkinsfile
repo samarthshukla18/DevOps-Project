@@ -13,11 +13,9 @@ node {
 		echo 'test stage completed'			
 	}
 	stage('SonarQube Stage') {		
-		steps{
-			withSonarQubeEnv('sonarqube-server'){
+		withSonarQubeEnv('sonarqube-server'){
 				sh "mvn sonar:sonar"
 			}
-		}
 	}
 	stage('Deploy Stage') {		
 		echo 'deploy stage started'
